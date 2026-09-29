@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard · Smart Parking</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <a class="brand" href="admin.html">🅿️ Smart Parking · Admin</a>
+  <nav>
+    <a href="locations.html">User View</a>
+    <a href="#" id="logoutLink">Log out</a>
+  </nav>
+</div>
+
+<div class="container">
+  <h2>Manage parking locations</h2>
+    <p class="hint" id="statsLine"></p>
+  <div id="error" class="error-msg"></div>
+
+  <div class="card">
+    <h3>Add a new location</h3>
+    <form id="addLocationForm">
+      <div class="split">
+        <div class="form-group">
+          <label for="name">Location name</label>
+          <input type="text" id="name" required>
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="text" id="address" required>
+        </div>
+      </div>
+      <div class="split">
+        <div class="form-group">
+          <label for="totalSlots">Total slots</label>
+          <input type="number" id="totalSlots" min="1" required>
+        </div>
+        <div class="form-group">
+          <label for="pricePerHour">Price per hour (₹)</label>
+          <input type="number" id="pricePerHour" min="0" step="0.01" required>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-amber">Add location</button>
+    </form>
+  </div>
+
+  <div id="locationList">Loading locations...</div>
+
+  <h2 style="margin-top:36px;">All reservations</h2>
+  <div id="reservationTableWrap">Loading reservations...</div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

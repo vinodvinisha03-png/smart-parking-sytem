@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Reservations · Smart Parking</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <a class="brand" href="locations.html">🅿️ Smart Parking</a>
+  <nav>
+    <a href="locations.html">Locations</a>
+    <a href="my-reservations.html">My Reservations</a>
+    <a href="#" id="adminLink" style="display:none;">Admin</a>
+    <a href="#" id="logoutLink">Log out</a>
+  </nav>
+</div>
+
+<div class="container">
+  <h2>My reservations</h2>
+    <p class="hint" id="totalSpent"></p>
+  <div id="error" class="error-msg"></div>
+  <div id="reservationList">Loading...</div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/my-reservations.js"></script>
+</body>
+</html>
