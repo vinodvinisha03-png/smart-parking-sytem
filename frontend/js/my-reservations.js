@@ -22,6 +22,10 @@ function paymentTag(r) {
 }
 
 function renderReservations(reservations) {
+  function showTotalSpent(reservations) {
+  const total = reservations.filter(r => r.paymentStatus === 'paid').reduce((s, r) => s + r.amount, 0);
+  document.getElementById('totalSpent').textContent = `Total spent (active bookings): \u20b9${total.toFixed(2)}`;
+}
   if (reservations.length === 0) {
     reservationList.innerHTML = '<div class="empty-state">You have no reservations yet. Go to Locations to reserve a slot.</div>';
     return;
@@ -58,3 +62,4 @@ async function cancelReservation(id) {
 }
 
 loadReservations();
+    showTotalSpent(reservations);
