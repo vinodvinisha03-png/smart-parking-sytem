@@ -23,8 +23,8 @@ function renderLocations(locations) {
       <h3>${escapeHtml(loc.name)}</h3>
       <p class="hint">${escapeHtml(loc.address)}</p>
       <p>
-        <span class="slot-count ${low ? 'low' : 'ok'}">${loc.availableSlots} / ${loc.totalSlots}</span> slots available
-        &nbsp;\u00b7&nbsp; \u20b9${loc.pricePerHour}/hour
+                <span class="slot-count ${low ? 'low' : loc.availableSlots <= 2 ? 'low' : 'ok'}">${loc.availableSlots} / ${loc.totalSlots}</span> slots available
+        ${loc.availableSlots > 0 && loc.availableSlots <= 2 ? '<span class="tag danger">Almost full</span>' : ''}
       </p>
       ${low
         ? `<button class="btn btn-sm" disabled>Full</button>`
