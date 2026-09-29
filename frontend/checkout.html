@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout · Smart Parking</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .checkout-grid { display:flex; gap:24px; flex-wrap:wrap; align-items:flex-start; }
+  .checkout-grid > .card { flex:1; min-width:280px; }
+  .summary-row { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--border); font-size:0.92rem; }
+  .summary-row.total { border-bottom:none; font-weight:700; font-size:1.05rem; padding-top:12px; }
+  .card-preview {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 18px;
+    font-family: 'Sora', sans-serif; position: relative; min-height: 150px;
+  }
+  .card-preview .chip { width:38px; height:28px; background:var(--amber); border-radius:5px; margin-bottom:22px; }
+  .card-preview .num { font-size:1.15rem; letter-spacing:2px; margin-bottom:18px; }
+  .card-preview .row { display:flex; justify-content:space-between; font-size:0.78rem; opacity:0.85; text-transform:uppercase; }
+  .spinner {
+    width:18px; height:18px; border:2.5px solid rgba(255,255,255,0.4); border-top-color:#fff;
+    border-radius:50%; display:inline-block; animation: spin 0.7s linear infinite; vertical-align:-3px; margin-right:8px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="brand" href="locations.html">🅿️ Smart Parking</a>
+  <nav>
+    <a href="locations.html">Locations</a>
+    <a href="my-reservations.html">My Reservations</a>
+    <a href="#" id="logoutLink">Log out</a>
+  </nav>
+</div>
+
+<div class="container">
+  <a href="locations.html" class="hint">&larr; Back to locations</a>
+  <h2 style="margin-top:14px;">Checkout</h2>
+  <div id="error" class="error-msg"></div>
+
+  <div id="checkoutContent" class="checkout-grid" style="display:none;">
+    <div class="card">
+      <h3 id="locName">Loading...</h3>
+      <p class="hint" id="locAddress"></p>
+
+      <div class="form-group">
+        <label for="vehicleNumber">Vehicle number</label>
+        <input type="text" id="vehicleNumber" placeholder="e.g. KA01AB1234" required>
+      </div>
+      <div class="form-group">
+        <label for="startTime">Start time</label>
+        <input type="datetime-local" id="startTime" required>
+      </div>
+      <div class="form-group">
+        <label for="endTime">End time</label>
+        <input type="datetime-local" id="endTime" required>
+      </div>
+
+      <div id="summaryBox" style="margin-top:18px;">
+        <div class="summary-row"><span>Duration</span><span id="sumDuration">&mdash;</span></div>
+        <div class="summary-row"><span>Rate</span><span id="sumRate">&mdash;</span></div>
+        <div class="summary-row total"><span>Total to pay</span><span id="sumTotal">&mdash;</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Payment details</h3>
+      <div class="card-preview">
+        <div class="chip"></div>
+        <div class="num" id="previewNumber">•••• •••• •••• ••••</div>
+        <div class="row">
+          <span id="previewName">CARDHOLDER NAME</span>
+          <span id="previewExpiry">MM/YY</span>
+        </div>
+      </div>
+
+      <div id="paymentError" class="error-msg"></div>
+      <form id="paymentForm">
+        <div class="form-group">
+          <label for="cardName">Name on card</label>
+          <input type="text" id="cardName" placeholder="As shown on card" required>
+        </div>
+        <div class="form-group">
+          <label for="cardNumber">Card number</label>
+          <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+        </div>
+        <div class="split">
+          <div class="form-group">
+            <label for="expiry">Expiry (MM/YY)</label>
+            <input type="text" id="expiry" placeholder="MM/YY" maxlength="5" required>
+          </div>
+          <div class="form-group">
+            <label for="cvv">CVV</label>
+            <input type="text" id="cvv" placeholder="123" maxlength="4" required>
+          </div>
+        </div>
+        <p class="hint" style="margin-bottom:14px;">This is a simulated checkout for demo purposes — no real payment is processed and no card data is stored.</p>
+        <button type="submit" class="btn btn-amber" id="payBtn" style="width:100%;">Pay <span id="payAmountLabel"></span></button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/checkout.js"></script>
+</body>
+</html>
