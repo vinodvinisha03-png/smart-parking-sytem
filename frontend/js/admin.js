@@ -27,6 +27,12 @@ document.getElementById('addLocationForm').addEventListener('submit', async (e) 
 
 // --- Location list with inline edit/delete ---
 function renderLocations(locations) {
+  function updateStats(locations) {
+  const totalSlots = locations.reduce((s, l) => s + l.totalSlots, 0);
+  const availableSlots = locations.reduce((s, l) => s + l.availableSlots, 0);
+  document.getElementById('statsLine').textContent =
+    `${locations.length} location${locations.length !== 1 ? 's' : ''} · ${availableSlots}/${totalSlots} slots free across all locations`;
+}
   if (locations.length === 0) {
     locationList.innerHTML = '<div class="empty-state">No locations added yet. Add one above.</div>';
     return;
@@ -130,4 +136,5 @@ async function loadReservations() {
 }
 
 loadLocations();
+updateStats(locations);
 loadReservations();
