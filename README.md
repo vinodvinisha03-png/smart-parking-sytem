@@ -5,9 +5,6 @@ A full-stack platform where users browse parking locations, check live slot avai
 **Stack:** HTML/CSS/JavaScript (frontend) · Node.js + Express (backend) · MongoDB Atlas (database)
 
 ## 1. Install dependencies
-```
-npm install
-```
 
 ## 2. Set up your environment variables
 1. Copy `.env.example` to a new file named exactly `.env`
@@ -20,27 +17,12 @@ npm install
 **Never commit `.env` to GitHub.**
 
 ## 3. Run the server
-```
-npm start
-```
 Open **http://localhost:3000**.
 
 ## 4. How to get an admin account
 Go to the signup page and fill the form as normal, but also enter the `ADMIN_SIGNUP_CODE` you set in `.env` into the "Admin code" field. That account will land on the Admin Dashboard instead of the regular Locations page. Create at least one admin first (e.g. for yourself) so you can add parking locations — otherwise the Locations page will be empty for everyone.
 
 ## 5. Project structure
-```
-backend/
-  server.js
-  models/         - User, ParkingLocation, Reservation
-  routes/         - auth, locations, reservations
-  middleware/auth.js - JWT verification + admin check
-frontend/
-  index.html, login.html, signup.html, locations.html,
-  checkout.html, my-reservations.html, admin.html
-  css/style.css
-  js/             - one file per page + api.js (shared fetch helper)
-```
 
 ## 6. How the core flow works
 1. **Admin** signs up with the admin code → adds parking locations (name, address, total slots, price/hour)
@@ -49,20 +31,11 @@ frontend/
 4. **My Reservations** → view all bookings, cancel an active one (slot is freed and the "payment" is marked refunded)
 5. **Admin Dashboard** → see every reservation across all users, with payment status and total revenue; edit or delete locations
 
-> Note on payment: this project uses a **simulated checkout** — the card form looks and behaves like a real one (formatting, validation, processing delay, transaction ID) but no real payment gateway is contacted and no card data is stored beyond the last 4 digits shown on the receipt. This is standard practice for a class project; if a real gateway is ever needed, a test-mode integration (e.g. Razorpay/Stripe test keys) can be swapped in without changing the rest of the app.
+> Note on payment: this project uses a **simulated checkout** — the card form looks and behaves like a real one (formatting, validation, processing delay, transaction ID) but no real payment gateway is contacted and no card data is stored beyond the last 4 digits shown on the receipt.
 
 ## 7. Working as a team on one laptop
 Before each person's turn:
-```
-git config user.name "Their Name"
-git config user.email "their-github-email@example.com"
-```
 Then code, then:
-```
-git add .
-git commit -m "Describe what you did"
-git push
-```
 
 ## Troubleshooting
 - **"MongoDB connection error"** → check `MONGODB_URI` in `.env` and Atlas Network Access allows `0.0.0.0/0`
